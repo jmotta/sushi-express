@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Digital - Sushi Express</title>
-    <!-- Importação das fontes específicas para o estilo do PDF -->
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Satisfy&family=Montserrat:wght@400;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <title>Vitrine Digital - Sushi Express</title>
+    <!-- Fontes: Anton (Sushi), Satisfy (Express), Montserrat (Slogan e Preços) -->
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Satisfy&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --red-brand: #E60000; /* Vermelho vibrante do PDF */
+            --red: #e63946;
             --gold: #d4af37;
-            --dark-bg: #050505;
-            --text-light: #ffffff;
-            --transition-time: 1s;
+            --dark: #0a0a0a;
+            --white: #ffffff;
+            --black-overlay: #111111;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -20,250 +20,236 @@
         body, html {
             width: 100vw;
             height: 100vh;
-            background-color: var(--dark-bg);
-            color: var(--text-light);
+            background-color: var(--dark);
+            color: var(--white);
             font-family: 'Montserrat', sans-serif;
             overflow: hidden;
         }
 
-        /* Fundo com textura discreta */
-        .bg-overlay {
+        /* Fundo Temático Oriental (Papel Washi e Pedra) */
+        .background-texture {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                radial-gradient(circle at 50% 50%, rgba(20, 20, 20, 0.8) 0%, #000 100%),
-                url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+                radial-gradient(circle at 50% 50%, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.9) 100%),
+                url('https://www.transparenttextures.com/patterns/handmade-paper.png');
             z-index: -1;
         }
 
-        /* --- CABEÇALHO ESTILO LOGO DO PDF --- */
-        .header-logo {
+        /* LOGOTIPO FIEL À CAPA */
+        .main-header {
             position: absolute;
-            top: 4vh;
-            left: 5vw;
+            top: 5vh;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 100;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            text-align: center;
+            width: 100%;
         }
 
-        .logo-wrapper {
+        .logo-container {
             position: relative;
             display: inline-block;
-            text-align: center;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
 
-        .sushi-title {
-            font-family: 'Anton', sans-serif; /* Fonte condensada e forte */
-            font-size: 6vw;
-            color: var(--red-brand);
+        .text-sushi {
+            font-family: 'Anton', sans-serif;
+            font-size: 10vw; /* Ajustado para TV */
+            color: var(--red);
             line-height: 0.8;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
 
-        .express-title {
-            font-family: 'Satisfy', cursive; /* Fonte caligráfica fluida */
-            font-size: 5vw;
-            color: #ffffff; /* No PDF é preto, mas no fundo escuro usamos branco para leitura */
+        .text-express {
+            font-family: 'Satisfy', cursive;
+            font-size: 7vw;
+            color: #000;
             position: absolute;
-            bottom: -2vh;
-            right: -1vw;
-            transform: rotate(-10deg);
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
+            bottom: -1.5vw;
+            right: -2vw;
+            text-shadow: 2px 2px 0px rgba(255,255,255,0.2);
+            transform: rotate(-5deg);
         }
 
         .slogan {
-            font-size: 0.9vw;
-            letter-spacing: 0.6vw;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2vw;
             font-weight: 700;
-            color: #fff;
+            letter-spacing: 0.8vw;
+            color: var(--white);
             text-transform: uppercase;
-            margin-top: 2.5vh;
-            white-space: nowrap;
+            margin-top: 15px;
         }
 
-        /* --- CARROSSEL --- */
+        /* CARROSSEL */
         #carousel { width: 100%; height: 100%; position: relative; }
 
         .slide {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             display: flex;
+            align-items: center;
+            justify-content: center;
             opacity: 0;
             visibility: hidden;
-            transition: opacity var(--transition-time) ease-in-out;
+            transition: opacity 1s ease-in-out;
+            padding: 20vh 5vw 5vh 5vw;
         }
 
         .slide.active { opacity: 1; visibility: visible; }
 
-        /* --- LAYOUT ITEM NORMAL --- */
-        .info-container {
-            flex: 0 0 45%;
+        /* Estilo Item Normal */
+        .content-wrap {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 15vh 0 0 5vw; /* Espaço para o logo no topo */
-            background: linear-gradient(90deg, #000 70%, transparent 100%);
-            z-index: 2;
-        }
-
-        .category-label {
-            color: var(--gold);
-            font-size: 1.5vw;
-            text-transform: uppercase;
-            letter-spacing: 0.4vw;
-            font-weight: 700;
-            margin-bottom: 1vh;
-        }
-
-        .item-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 4.5vw;
-            line-height: 1.1;
-            margin-bottom: 2vh;
-        }
-
-        .item-desc {
-            font-size: 1.3vw;
-            color: #bbb;
-            margin-bottom: 4vh;
-            line-height: 1.4;
-            max-width: 85%;
-        }
-
-        .price-tag { display: flex; align-items: baseline; font-weight: 900; }
-        .currency { font-size: 2vw; color: var(--gold); margin-right: 0.8vw; }
-        .price-value { font-size: 6.5vw; }
-
-        .image-container { flex: 0 0 55%; overflow: hidden; position: relative; }
-        .image-container img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.1); }
-        .active .image-container img { animation: kenBurns 12s linear forwards; }
-
-        /* --- LAYOUT PROMOÇÃO --- */
-        .slide.promo-slide {
-            flex-direction: column;
+            width: 100%;
+            max-width: 1600px;
             align-items: center;
-            justify-content: center;
-            background-size: cover;
-            background-position: center;
+            gap: 5vw;
         }
-        .promo-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.65); z-index: 1;
+
+        .item-info { flex: 1; }
+        .item-image { 
+            flex: 1; 
+            height: 50vh; 
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 5px solid rgba(255,255,255,0.05);
         }
-        .promo-content { position: relative; z-index: 2; text-align: center; }
-        .promo-header {
-            background: var(--red-brand);
-            padding: 1vh 3vw; font-size: 1.8vw; font-weight: 900;
-            border-radius: 50px; margin-bottom: 3vh; display: inline-block;
+        .item-image img { width: 100%; height: 100%; object-fit: cover; }
+
+        .category { color: var(--gold); font-size: 1.5vw; text-transform: uppercase; letter-spacing: 3px; font-weight: 700; margin-bottom: 10px; }
+        .name { font-size: 4.5vw; font-weight: 900; margin-bottom: 20px; line-height: 1; }
+        .desc { font-size: 1.4vw; color: #ccc; margin-bottom: 30px; line-height: 1.4; }
+        .price { font-size: 6vw; font-weight: 900; color: var(--white); }
+        .price span { font-size: 2.5vw; color: var(--gold); margin-right: 10px; }
+
+        /* Estilo PROMOÇÃO */
+        .promotion {
+            background: radial-gradient(circle, rgba(230, 57, 70, 0.2) 0%, transparent 70%);
+            flex-direction: column;
+            text-align: center;
+        }
+        .promo-badge {
+            background: var(--red);
+            padding: 10px 40px;
+            border-radius: 50px;
+            font-size: 1.5vw;
+            font-weight: 900;
+            margin-bottom: 20px;
             animation: pulse 2s infinite;
         }
-        .promo-title { font-family: 'Playfair Display', serif; font-size: 7vw; color: var(--gold); margin-bottom: 2vh; }
-        .price-new { font-size: 10vw; font-weight: 900; color: #fff; }
+        .promo-name { font-size: 7vw; font-weight: 900; color: var(--gold); text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .promo-price { font-size: 10vw; margin-top: 10px; }
 
-        @keyframes kenBurns { from { transform: scale(1.1); } to { transform: scale(1.3); } }
         @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(230, 0, 0, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(230, 0, 0, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(230, 0, 0, 0); }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); box-shadow: 0 0 30px var(--red); }
+            100% { transform: scale(1); }
         }
+
     </style>
 </head>
 <body>
 
-    <div class="bg-overlay"></div>
+    <div class="background-texture"></div>
 
-    <!-- Cabeçalho idêntico ao estilo do PDF -->
-    <header class="header-logo">
-        <div class="logo-wrapper">
-            <div class="sushi-title">SUSHI</div>
-            <div class="express-title">Express</div>
+    <header class="main-header">
+        <div class="logo-container">
+            <div class="text-sushi">SUSHI</div>
+            <div class="text-express">Express</div>
         </div>
         <div class="slogan">O MELHOR JAPA DA SUA VIDA</div>
     </header>
 
-    <div id="carousel"></div>
+    <div id="carousel">
+        <!-- Slides gerados por JS -->
+    </div>
 
     <script>
-        const menu = [
+        const menuData = [
             {
                 type: 'promo',
                 name: "COMBO 50 PEÇAS",
-                desc: "SÓ LOVE HOT: A combinação perfeita dos nossos hots mais amados.",
-                newPrice: "119,99",
-                img: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=2070&auto=format&fit=crop",
+                desc: "SÓ LOVE HOT: 20 Hot Filadélfia, 20 Hot Camarão, 10 Hot do Chefe.",
+                price: "119,99",
                 duration: 12000
             },
             {
                 type: 'normal',
                 cat: "Sashimi",
                 name: "Salmão Maçaricado",
-                desc: "10 Lâminas de peixe cru seladas ao fogo com teriyaki e gergelim.",
+                desc: "10 unidades com molho teriyaki e gergelim crocante.",
                 price: "39,90",
-                img: "https://images.unsplash.com/photo-1534483909714-d40b4568324e?q=80&w=2070&auto=format&fit=crop",
+                img: "https://images.unsplash.com/photo-1534483909714-d40b4568324e?auto=format&fit=crop&w=800",
                 duration: 8000
             },
             {
                 type: 'normal',
-                cat: "Hossomaki",
-                name: "Filadélfia",
-                desc: "10 Peças enroladas com salmão fresco, cream cheese e cebolinha.",
-                price: "25,99",
-                img: "https://images.unsplash.com/photo-1617196034183-421b4917c92d?q=80&w=2070&auto=format&fit=crop",
+                cat: "Temaki",
+                name: "Camarão Super Hot",
+                desc: "Camarão, cream cheese e cebolinha, empanado e frito na panko.",
+                price: "30,99",
+                img: "https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800",
+                duration: 8000
+            },
+            {
+                type: 'normal',
+                cat: "Hots",
+                name: "Hot do Chefe",
+                desc: "Salmão, camarão empanado, gergelim e molho especial do chefe.",
+                price: "39,99",
+                img: "https://images.unsplash.com/photo-1617196034183-421b4917c92d?auto=format&fit=crop&w=800",
                 duration: 8000
             }
         ];
 
-        const container = document.getElementById('carousel');
+        const carousel = document.getElementById('carousel');
 
-        function initMenu() {
-            menu.forEach((item, index) => {
+        function buildSlides() {
+            menuData.forEach((item, index) => {
                 const slide = document.createElement('div');
                 if(item.type === 'promo') {
-                    slide.className = `slide promo-slide ${index === 0 ? 'active' : ''}`;
-                    slide.style.backgroundImage = `url('${item.img}')`;
+                    slide.className = `slide promotion ${index === 0 ? 'active' : ''}`;
                     slide.innerHTML = `
-                        <div class="promo-overlay"></div>
-                        <div class="promo-content">
-                            <div class="promo-header">PROMOÇÃO DO DIA</div>
-                            <h2 class="promo-title">${item.name}</h2>
-                            <div class="price-new"><small style="font-size: 3vw">R$</small>${item.newPrice}</div>
-                        </div>
+                        <div class="promo-badge">PROMOÇÃO DO DIA</div>
+                        <div class="promo-name">${item.name}</div>
+                        <div class="desc" style="max-width: 800px">${item.desc}</div>
+                        <div class="promo-price"><span style="font-size: 3vw; color: var(--gold)">R$</span> ${item.price}</div>
                     `;
                 } else {
                     slide.className = `slide ${index === 0 ? 'active' : ''}`;
                     slide.innerHTML = `
-                        <div class="info-container">
-                            <div class="category-label">${item.cat}</div>
-                            <h1 class="item-name">${item.name}</h1>
-                            <p class="item-desc">${item.desc}</p>
-                            <div class="price-tag">
-                                <span class="currency">R$</span>
-                                <span class="price-value">${item.price}</span>
+                        <div class="content-wrap">
+                            <div class="item-info">
+                                <div class="category">${item.cat}</div>
+                                <div class="name">${item.name}</div>
+                                <div class="desc">${item.desc}</div>
+                                <div class="price"><span>R$</span>${item.price}</div>
                             </div>
-                        </div>
-                        <div class="image-container">
-                            <img src="${item.img}" alt="${item.name}">
+                            <div class="item-image">
+                                <img src="${item.img}" alt="${item.name}">
+                            </div>
                         </div>
                     `;
                 }
-                container.appendChild(slide);
+                carousel.appendChild(slide);
             });
-            startCarousel(0);
+            runCarousel(0);
         }
 
-        function startCarousel(index) {
+        function runCarousel(idx) {
             const slides = document.querySelectorAll('.slide');
-            const currentItem = menu[index];
             slides.forEach(s => s.classList.remove('active'));
-            slides[index].classList.add('active');
-            const nextIndex = (index + 1) % menu.length;
-            setTimeout(() => { startCarousel(nextIndex); }, currentItem.duration);
+            slides[idx].classList.add('active');
+
+            const nextIdx = (idx + 1) % menuData.length;
+            setTimeout(() => runCarousel(nextIdx), menuData[idx].duration);
         }
 
-        window.onload = initMenu;
+        window.onload = buildSlides;
     </script>
 </body>
 </html>
