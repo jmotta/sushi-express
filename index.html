@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Digital - Sushi Express</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <!-- Importação das fontes específicas para o estilo do PDF -->
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Satisfy&family=Montserrat:wght@400;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     <style>
         :root {
+            --red-brand: #E60000; /* Vermelho vibrante do PDF */
             --gold: #d4af37;
-            --red: #c62828;
             --dark-bg: #050505;
             --text-light: #ffffff;
             --transition-time: 1s;
@@ -22,19 +23,68 @@
             background-color: var(--dark-bg);
             color: var(--text-light);
             font-family: 'Montserrat', sans-serif;
-            overflow: hidden; /* Garante que não apareça barra de rolagem na TV */
+            overflow: hidden;
         }
 
-        /* Textura de fundo oriental */
+        /* Fundo com textura discreta */
         .bg-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                radial-gradient(circle at 10% 90%, rgba(198, 40, 40, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(20, 20, 20, 0.8) 0%, #000 100%),
                 url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
             z-index: -1;
         }
 
+        /* --- CABEÇALHO ESTILO LOGO DO PDF --- */
+        .header-logo {
+            position: absolute;
+            top: 4vh;
+            left: 5vw;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-wrapper {
+            position: relative;
+            display: inline-block;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .sushi-title {
+            font-family: 'Anton', sans-serif; /* Fonte condensada e forte */
+            font-size: 6vw;
+            color: var(--red-brand);
+            line-height: 0.8;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .express-title {
+            font-family: 'Satisfy', cursive; /* Fonte caligráfica fluida */
+            font-size: 5vw;
+            color: #ffffff; /* No PDF é preto, mas no fundo escuro usamos branco para leitura */
+            position: absolute;
+            bottom: -2vh;
+            right: -1vw;
+            transform: rotate(-10deg);
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
+        }
+
+        .slogan {
+            font-size: 0.9vw;
+            letter-spacing: 0.6vw;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            margin-top: 2.5vh;
+            white-space: nowrap;
+        }
+
+        /* --- CARROSSEL --- */
         #carousel { width: 100%; height: 100%; position: relative; }
 
         .slide {
@@ -48,14 +98,14 @@
 
         .slide.active { opacity: 1; visibility: visible; }
 
-        /* --- LAYOUT ITEM NORMAL (Otimizado para TV) --- */
+        /* --- LAYOUT ITEM NORMAL --- */
         .info-container {
             flex: 0 0 45%;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 0 5vw;
-            background: linear-gradient(90deg, #000 80%, transparent 100%);
+            padding: 15vh 0 0 5vw; /* Espaço para o logo no topo */
+            background: linear-gradient(90deg, #000 70%, transparent 100%);
             z-index: 2;
         }
 
@@ -63,184 +113,105 @@
             color: var(--gold);
             font-size: 1.5vw;
             text-transform: uppercase;
-            letter-spacing: 0.5vw;
+            letter-spacing: 0.4vw;
             font-weight: 700;
             margin-bottom: 1vh;
         }
 
         .item-name {
             font-family: 'Playfair Display', serif;
-            font-size: 4.5vw; /* Fonte grande para TV */
+            font-size: 4.5vw;
             line-height: 1.1;
             margin-bottom: 2vh;
-            color: #fff;
         }
 
         .item-desc {
-            font-size: 1.4vw;
+            font-size: 1.3vw;
             color: #bbb;
             margin-bottom: 4vh;
             line-height: 1.4;
-            max-width: 90%;
+            max-width: 85%;
         }
 
-        .price-tag {
-            display: flex;
-            align-items: baseline;
-            font-weight: 900;
-        }
+        .price-tag { display: flex; align-items: baseline; font-weight: 900; }
+        .currency { font-size: 2vw; color: var(--gold); margin-right: 0.8vw; }
+        .price-value { font-size: 6.5vw; }
 
-        .currency-symbol { font-size: 2vw; color: var(--gold); margin-right: 0.8vw; }
-        .price-value { font-size: 6.5vw; color: #fff; }
+        .image-container { flex: 0 0 55%; overflow: hidden; position: relative; }
+        .image-container img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.1); }
+        .active .image-container img { animation: kenBurns 12s linear forwards; }
 
-        .image-container {
-            flex: 0 0 55%;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transform: scale(1.1);
-        }
-
-        .active .image-container img {
-            animation: kenBurns 12s linear forwards;
-        }
-
-        /* --- LAYOUT PROMOÇÃO (Full Screen Impact) --- */
+        /* --- LAYOUT PROMOÇÃO --- */
         .slide.promo-slide {
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
         }
-
         .promo-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
-            z-index: 1;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.65); z-index: 1;
         }
-
-        .promo-content { position: relative; z-index: 2; width: 80%; }
-
+        .promo-content { position: relative; z-index: 2; text-align: center; }
         .promo-header {
-            background: var(--red);
-            color: #fff;
-            padding: 1vh 3vw;
-            font-size: 1.8vw;
-            font-weight: 900;
-            display: inline-block;
-            border-radius: 50px;
-            margin-bottom: 3vh;
+            background: var(--red-brand);
+            padding: 1vh 3vw; font-size: 1.8vw; font-weight: 900;
+            border-radius: 50px; margin-bottom: 3vh; display: inline-block;
             animation: pulse 2s infinite;
         }
+        .promo-title { font-family: 'Playfair Display', serif; font-size: 7vw; color: var(--gold); margin-bottom: 2vh; }
+        .price-new { font-size: 10vw; font-weight: 900; color: #fff; }
 
-        .promo-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 7vw;
-            color: var(--gold);
-            margin-bottom: 2vh;
-            text-shadow: 0 5px 20px rgba(0,0,0,0.8);
-        }
-
-        .promo-pricing {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 4vw;
-        }
-
-        .price-old {
-            font-size: 3vw;
-            color: #888;
-            text-decoration: line-through;
-        }
-
-        .price-new {
-            font-size: 9vw;
-            font-weight: 900;
-            color: #fff;
-            text-shadow: 0 0 30px rgba(255,255,255,0.3);
-        }
-
-        /* --- ANIMAÇÕES --- */
-        @keyframes kenBurns {
-            from { transform: scale(1.1); }
-            to { transform: scale(1.3); }
-        }
-
+        @keyframes kenBurns { from { transform: scale(1.1); } to { transform: scale(1.3); } }
         @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(198, 40, 40, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(198, 40, 40, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(198, 40, 40, 0); }
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(230, 0, 0, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(230, 0, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(230, 0, 0, 0); }
         }
-
-        /* Selo Sushi Express */
-        .brand-corner {
-            position: absolute;
-            top: 5vh;
-            left: 5vw;
-            z-index: 10;
-            font-weight: 900;
-            font-size: 1.8vw;
-            color: var(--red);
-            letter-spacing: 0.3vw;
-        }
-
     </style>
 </head>
 <body>
 
     <div class="bg-overlay"></div>
-    <div class="brand-corner">SUSHI EXPRESS</div>
 
-    <div id="carousel">
-        <!-- Slides gerados via JavaScript -->
-    </div>
+    <!-- Cabeçalho idêntico ao estilo do PDF -->
+    <header class="header-logo">
+        <div class="logo-wrapper">
+            <div class="sushi-title">SUSHI</div>
+            <div class="express-title">Express</div>
+        </div>
+        <div class="slogan">O MELHOR JAPA DA SUA VIDA</div>
+    </header>
+
+    <div id="carousel"></div>
 
     <script>
         const menu = [
             {
                 type: 'promo',
-                name: "COMBO FAMÍLIA 80 PEÇAS",
-                desc: "A maior variedade da casa com desconto exclusivo hoje.",
-                oldPrice: "189,90",
-                newPrice: "145,00",
+                name: "COMBO 50 PEÇAS",
+                desc: "SÓ LOVE HOT: A combinação perfeita dos nossos hots mais amados.",
+                newPrice: "119,99",
                 img: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=2070&auto=format&fit=crop",
                 duration: 12000
             },
             {
                 type: 'normal',
-                cat: "Sushi",
-                name: "Niguiri Salmão",
-                desc: "8 Unidades de lâminas selecionadas sobre arroz japonês premium.",
-                price: "32,99",
-                img: "https://images.unsplash.com/photo-1583623025817-d180a2221d0a?q=80&w=2070&auto=format&fit=crop",
+                cat: "Sashimi",
+                name: "Salmão Maçaricado",
+                desc: "10 Lâminas de peixe cru seladas ao fogo com teriyaki e gergelim.",
+                price: "39,90",
+                img: "https://images.unsplash.com/photo-1534483909714-d40b4568324e?q=80&w=2070&auto=format&fit=crop",
                 duration: 8000
             },
             {
                 type: 'normal',
-                cat: "Quentes",
-                name: "Hot Filadélfia",
-                desc: "10 Unidades fritas na hora com cream cheese e cebolinha fresca.",
-                price: "29,99",
+                cat: "Hossomaki",
+                name: "Filadélfia",
+                desc: "10 Peças enroladas com salmão fresco, cream cheese e cebolinha.",
+                price: "25,99",
                 img: "https://images.unsplash.com/photo-1617196034183-421b4917c92d?q=80&w=2070&auto=format&fit=crop",
-                duration: 8000
-            },
-            {
-                type: 'normal',
-                cat: "Temakis",
-                name: "Temaki de Camarão",
-                desc: "Recheado com camarões empanados e molho especial do chef.",
-                price: "30,99",
-                img: "https://images.unsplash.com/photo-1553621042-f6e147245754?q=80&w=1925&auto=format&fit=crop",
                 duration: 8000
             }
         ];
@@ -256,12 +227,9 @@
                     slide.innerHTML = `
                         <div class="promo-overlay"></div>
                         <div class="promo-content">
-                            <div class="promo-header">PROMOÇÃO ESPECIAL</div>
+                            <div class="promo-header">PROMOÇÃO DO DIA</div>
                             <h2 class="promo-title">${item.name}</h2>
-                            <div class="promo-pricing">
-                                <div class="price-old">De R$ ${item.oldPrice}</div>
-                                <div class="price-new"><small style="font-size: 3vw">R$</small>${item.newPrice}</div>
-                            </div>
+                            <div class="price-new"><small style="font-size: 3vw">R$</small>${item.newPrice}</div>
                         </div>
                     `;
                 } else {
@@ -272,7 +240,7 @@
                             <h1 class="item-name">${item.name}</h1>
                             <p class="item-desc">${item.desc}</p>
                             <div class="price-tag">
-                                <span class="currency-symbol">R$</span>
+                                <span class="currency">R$</span>
                                 <span class="price-value">${item.price}</span>
                             </div>
                         </div>
@@ -289,18 +257,10 @@
         function startCarousel(index) {
             const slides = document.querySelectorAll('.slide');
             const currentItem = menu[index];
-
-            // Remove active de todos e adiciona no atual
             slides.forEach(s => s.classList.remove('active'));
             slides[index].classList.add('active');
-
-            // Calcula o próximo índice
             const nextIndex = (index + 1) % menu.length;
-
-            // Agenda a próxima transição com base na duração definida no array
-            setTimeout(() => {
-                startCarousel(nextIndex);
-            }, currentItem.duration);
+            setTimeout(() => { startCarousel(nextIndex); }, currentItem.duration);
         }
 
         window.onload = initMenu;
