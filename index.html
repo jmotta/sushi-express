@@ -3,214 +3,307 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sushi Express - Vitrine Premium V2</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <title>Menu Digital - Sushi Express</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #c5a059;
-            --gold-bright: #ffdfa0;
-            --red: #e63946;
-            --dark: #0a0a0a;
-            --light: #f4f4f4;
-            --transition-speed: 1s;
+            --gold: #d4af37;
+            --red: #c62828;
+            --dark-bg: #050505;
+            --text-light: #ffffff;
+            --transition-time: 1s;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body, html {
-            width: 100%; height: 100%;
-            background-color: var(--dark);
-            color: var(--light);
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
             font-family: 'Montserrat', sans-serif;
-            overflow: hidden;
+            overflow: hidden; /* Garante que não apareça barra de rolagem na TV */
         }
 
-        /* Background Base */
-        .main-bg {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000 100%);
+        /* Textura de fundo oriental */
+        .bg-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 10% 90%, rgba(198, 40, 40, 0.15) 0%, transparent 40%),
+                url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
             z-index: -1;
         }
 
         #carousel { width: 100%; height: 100%; position: relative; }
 
         .slide {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; opacity: 0; visibility: hidden;
-            transition: opacity var(--transition-speed) ease-in-out;
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--transition-time) ease-in-out;
         }
 
         .slide.active { opacity: 1; visibility: visible; }
 
-        /* --- ESTILO ITEM COMUM (Split Screen) --- */
-        .info-side {
-            flex: 1; display: flex; flex-direction: column;
-            justify-content: center; padding: 0 8%; z-index: 2;
+        /* --- LAYOUT ITEM NORMAL (Otimizado para TV) --- */
+        .info-container {
+            flex: 0 0 45%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 5vw;
+            background: linear-gradient(90deg, #000 80%, transparent 100%);
+            z-index: 2;
         }
-        .category-tag {
-            color: var(--gold); text-transform: uppercase;
-            letter-spacing: 4px; font-weight: 700; margin-bottom: 20px;
-        }
-        .product-name {
-            font-family: 'Playfair Display', serif; font-size: 4.5rem;
-            line-height: 1.1; margin-bottom: 20px;
-        }
-        .description { font-size: 1.3rem; color: #aaa; margin-bottom: 30px; max-width: 500px; }
-        .price-box { display: flex; align-items: baseline; }
-        .currency { font-size: 2rem; color: var(--gold); margin-right: 10px; }
-        .value { font-size: 5.5rem; font-weight: 900; }
-        .image-side {
-            flex: 1.2; position: relative; overflow: hidden;
-            clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
-        }
-        .product-img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.1); }
-        .active .product-img { animation: kenBurns 12s linear forwards; }
 
-        /* --- ESTILO PROMOÇÃO (Full Highlight) --- */
-        .slide.promotion {
-            flex-direction: column; align-items: center; justify-content: center;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover; background-position: center;
+        .category-label {
+            color: var(--gold);
+            font-size: 1.5vw;
+            text-transform: uppercase;
+            letter-spacing: 0.5vw;
+            font-weight: 700;
+            margin-bottom: 1vh;
         }
-        .promo-badge {
-            background: var(--red); color: white; padding: 10px 30px;
-            font-weight: 900; font-size: 1.5rem; border-radius: 50px;
-            margin-bottom: 20px; animation: pulse 2s infinite;
+
+        .item-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5vw; /* Fonte grande para TV */
+            line-height: 1.1;
+            margin-bottom: 2vh;
+            color: #fff;
         }
+
+        .item-desc {
+            font-size: 1.4vw;
+            color: #bbb;
+            margin-bottom: 4vh;
+            line-height: 1.4;
+            max-width: 90%;
+        }
+
+        .price-tag {
+            display: flex;
+            align-items: baseline;
+            font-weight: 900;
+        }
+
+        .currency-symbol { font-size: 2vw; color: var(--gold); margin-right: 0.8vw; }
+        .price-value { font-size: 6.5vw; color: #fff; }
+
+        .image-container {
+            flex: 0 0 55%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.1);
+        }
+
+        .active .image-container img {
+            animation: kenBurns 12s linear forwards;
+        }
+
+        /* --- LAYOUT PROMOÇÃO (Full Screen Impact) --- */
+        .slide.promo-slide {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .promo-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1;
+        }
+
+        .promo-content { position: relative; z-index: 2; width: 80%; }
+
+        .promo-header {
+            background: var(--red);
+            color: #fff;
+            padding: 1vh 3vw;
+            font-size: 1.8vw;
+            font-weight: 900;
+            display: inline-block;
+            border-radius: 50px;
+            margin-bottom: 3vh;
+            animation: pulse 2s infinite;
+        }
+
         .promo-title {
-            font-family: 'Playfair Display', serif; font-size: 6rem;
-            color: var(--gold-bright); text-align: center; margin-bottom: 10px;
-            text-shadow: 0 0 30px rgba(197, 160, 89, 0.5);
-        }
-        .promo-price {
-            font-size: 8rem; font-weight: 900; color: #fff;
-            display: flex; align-items: center;
-        }
-        .old-price {
-            font-size: 2.5rem; color: #666; text-decoration: line-through;
-            margin-right: 30px; font-weight: 400;
+            font-family: 'Playfair Display', serif;
+            font-size: 7vw;
+            color: var(--gold);
+            margin-bottom: 2vh;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.8);
         }
 
-        /* Animações */
-        @keyframes kenBurns { from { transform: scale(1.1); } to { transform: scale(1.3); } }
+        .promo-pricing {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4vw;
+        }
+
+        .price-old {
+            font-size: 3vw;
+            color: #888;
+            text-decoration: line-through;
+        }
+
+        .price-new {
+            font-size: 9vw;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 30px rgba(255,255,255,0.3);
+        }
+
+        /* --- ANIMAÇÕES --- */
+        @keyframes kenBurns {
+            from { transform: scale(1.1); }
+            to { transform: scale(1.3); }
+        }
+
         @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(230, 57, 70, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(230, 57, 70, 0); }
-        }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .active .promo-title, .active .promo-price, .active .promo-badge {
-            animation: slideUp 0.8s ease-out forwards;
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(198, 40, 40, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(198, 40, 40, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(198, 40, 40, 0); }
         }
 
-        .brand-logo {
-            position: absolute; top: 40px; left: 80px; z-index: 100;
-            font-weight: 900; color: var(--red); letter-spacing: 5px;
+        /* Selo Sushi Express */
+        .brand-corner {
+            position: absolute;
+            top: 5vh;
+            left: 5vw;
+            z-index: 10;
+            font-weight: 900;
+            font-size: 1.8vw;
+            color: var(--red);
+            letter-spacing: 0.3vw;
         }
+
     </style>
 </head>
 <body>
 
-    <div class="main-bg"></div>
-    <div class="brand-logo">SUSHI EXPRESS</div>
+    <div class="bg-overlay"></div>
+    <div class="brand-corner">SUSHI EXPRESS</div>
 
-    <div id="carousel"></div>
+    <div id="carousel">
+        <!-- Slides gerados via JavaScript -->
+    </div>
 
     <script>
-        const menuItems = [
+        const menu = [
             {
                 type: 'promo',
-                name: "BARCA SUPREMA DO CHEFE",
-                desc: "80 Peças Variadas: O melhor da nossa culinária em um só prato.",
+                name: "COMBO FAMÍLIA 80 PEÇAS",
+                desc: "A maior variedade da casa com desconto exclusivo hoje.",
                 oldPrice: "189,90",
-                price: "149,90",
-                duration: 12000 // 12 segundos
+                newPrice: "145,00",
+                img: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=2070&auto=format&fit=crop",
+                duration: 12000
             },
             {
                 type: 'normal',
-                cat: "Sashimi",
-                name: "Sashimi de Salmão",
-                desc: "10 Lâminas de salmão premium cortadas rigorosamente para derreter na boca.",
-                price: "37,90",
-                img: "https://images.unsplash.com/photo-1534483909714-d40b4568324e?q=80&w=2070&auto=format&fit=crop",
-                duration: 8000 // 8 segundos
+                cat: "Sushi",
+                name: "Niguiri Salmão",
+                desc: "8 Unidades de lâminas selecionadas sobre arroz japonês premium.",
+                price: "32,99",
+                img: "https://images.unsplash.com/photo-1583623025817-d180a2221d0a?q=80&w=2070&auto=format&fit=crop",
+                duration: 8000
             },
             {
                 type: 'normal',
-                cat: "Hots",
+                cat: "Quentes",
                 name: "Hot Filadélfia",
-                desc: "Enrolado de salmão com cream cheese, frito em farinha panko crocante.",
+                desc: "10 Unidades fritas na hora com cream cheese e cebolinha fresca.",
                 price: "29,99",
                 img: "https://images.unsplash.com/photo-1617196034183-421b4917c92d?q=80&w=2070&auto=format&fit=crop",
                 duration: 8000
             },
             {
                 type: 'normal',
-                cat: "Especiais",
-                name: "Temaki Camarão Hot",
-                desc: "Cone crocante recheado com camarões selecionados e tempero especial.",
+                cat: "Temakis",
+                name: "Temaki de Camarão",
+                desc: "Recheado com camarões empanados e molho especial do chef.",
                 price: "30,99",
                 img: "https://images.unsplash.com/photo-1553621042-f6e147245754?q=80&w=1925&auto=format&fit=crop",
                 duration: 8000
             }
         ];
 
-        const carousel = document.getElementById('carousel');
+        const container = document.getElementById('carousel');
 
-        function createSlides() {
-            menuItems.forEach((item, index) => {
+        function initMenu() {
+            menu.forEach((item, index) => {
                 const slide = document.createElement('div');
-                if (item.type === 'promo') {
-                    slide.className = `slide promotion ${index === 0 ? 'active' : ''}`;
+                if(item.type === 'promo') {
+                    slide.className = `slide promo-slide ${index === 0 ? 'active' : ''}`;
+                    slide.style.backgroundImage = `url('${item.img}')`;
                     slide.innerHTML = `
-                        <div class="promo-badge">PROMOÇÃO DO DIA</div>
-                        <h2 class="promo-title">${item.name}</h2>
-                        <p style="font-size: 1.5rem; margin-bottom: 20px; color: #ccc">${item.desc}</p>
-                        <div class="promo-price">
-                            <span class="old-price">R$ ${item.oldPrice}</span>
-                            <span style="color: var(--gold); margin-right: 15px; font-size: 3rem">R$</span>
-                            <span>${item.price}</span>
+                        <div class="promo-overlay"></div>
+                        <div class="promo-content">
+                            <div class="promo-header">PROMOÇÃO ESPECIAL</div>
+                            <h2 class="promo-title">${item.name}</h2>
+                            <div class="promo-pricing">
+                                <div class="price-old">De R$ ${item.oldPrice}</div>
+                                <div class="price-new"><small style="font-size: 3vw">R$</small>${item.newPrice}</div>
+                            </div>
                         </div>
                     `;
                 } else {
                     slide.className = `slide ${index === 0 ? 'active' : ''}`;
                     slide.innerHTML = `
-                        <div class="info-side">
-                            <div class="category-tag">${item.cat}</div>
-                            <h2 class="product-name">${item.name}</h2>
-                            <p class="description">${item.desc}</p>
-                            <div class="price-box">
-                                <span class="currency">R$</span>
-                                <span class="value">${item.price}</span>
+                        <div class="info-container">
+                            <div class="category-label">${item.cat}</div>
+                            <h1 class="item-name">${item.name}</h1>
+                            <p class="item-desc">${item.desc}</p>
+                            <div class="price-tag">
+                                <span class="currency-symbol">R$</span>
+                                <span class="price-value">${item.price}</span>
                             </div>
                         </div>
-                        <div class="image-side">
-                            <img src="${item.img}" class="product-img">
+                        <div class="image-container">
+                            <img src="${item.img}" alt="${item.name}">
                         </div>
                     `;
                 }
-                carousel.appendChild(slide);
+                container.appendChild(slide);
             });
+            startCarousel(0);
         }
 
-        let currentIdx = 0;
-        
-        function nextSlide() {
+        function startCarousel(index) {
             const slides = document.querySelectorAll('.slide');
-            slides[currentIdx].classList.remove('active');
-            
-            currentIdx = (currentIdx + 1) % slides.length;
-            slides[currentIdx].classList.add('active');
-            
-            // Define o próximo tempo baseado no item atual
-            const currentItem = menuItems[currentIdx];
-            setTimeout(nextSlide, currentItem.duration);
+            const currentItem = menu[index];
+
+            // Remove active de todos e adiciona no atual
+            slides.forEach(s => s.classList.remove('active'));
+            slides[index].classList.add('active');
+
+            // Calcula o próximo índice
+            const nextIndex = (index + 1) % menu.length;
+
+            // Agenda a próxima transição com base na duração definida no array
+            setTimeout(() => {
+                startCarousel(nextIndex);
+            }, currentItem.duration);
         }
 
-        createSlides();
-        // Inicia o ciclo com o tempo do primeiro item
-        setTimeout(nextSlide, menuItems[0].duration);
+        window.onload = initMenu;
     </script>
 </body>
 </html>
