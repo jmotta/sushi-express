@@ -170,19 +170,28 @@
 
     <script>
         const menuData = [
+            // {
+            //     type: 'promo',
+            //     name: "COMBO 50 PEÇAS",
+            //     desc: "SÓ LOVE HOT: 20 Hot Filadélfia, 20 Hot Camarão, 10 Hot do Chefe.",
+            //     price: "119,99",
+            //     duration: 12000
+            // },
             {
-                type: 'promo',
-                name: "COMBO 50 PEÇAS",
-                desc: "SÓ LOVE HOT: 20 Hot Filadélfia, 20 Hot Camarão, 10 Hot do Chefe.",
-                price: "119,99",
-                duration: 12000
+                type: 'normal',
+                cat: "Temaki",
+                name: "Filadélfia",
+                desc: "Salmão, cream cheese e cebolinha.",
+                price: "28,99",
+                img: "https://images.unsplash.com/photo-1534483909714-d40b4568324e?auto=format&fit=crop&w=800",
+                duration: 8000
             },
             {
                 type: 'normal',
-                cat: "Sashimi",
-                name: "Salmão Maçaricado",
-                desc: "10 unidades com molho teriyaki e gergelim crocante.",
-                price: "39,90",
+                cat: "Temaki",
+                name: "Salmão",
+                desc: "Salmão e cebolinha.",
+                price: "28,99",
                 img: "https://images.unsplash.com/photo-1534483909714-d40b4568324e?auto=format&fit=crop&w=800",
                 duration: 8000
             },
@@ -190,16 +199,80 @@
                 type: 'normal',
                 cat: "Temaki",
                 name: "Camarão Super Hot",
-                desc: "Camarão, cream cheese e cebolinha, empanado e frito na panko.",
+                desc: "Camarão empanado, cream cheese e cebolinha.",
+                price: "28,99",
+                img: "https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800",
+                duration: 8000
+            },
+            {
+                type: 'normal',
+                cat: "Temaki",
+                name: "SKIN",
+                desc: "Pele Salmão grelhada, cream cheese e cebolinha.",
+                price: "20,99",
+                img: "https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800",
+                duration: 8000
+            },
+            {
+                type: 'normal',
+                cat: "Temaki",
+                name: "Camarão super hot",
+                desc: "Camarão, cream cheese e cebolinha.",
                 price: "30,99",
                 img: "https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800",
                 duration: 8000
             },
             {
                 type: 'normal',
+                cat: "Temaki",
+                name: "Filadélfia super hot",
+                desc: "Salmão, cream cheese e cebolinha.",
+                price: "30,99",
+                img: "https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800",
+                duration: 8000
+            },
+            {
+                type: 'normal',
+                cat: "Temaki",
+                name: "Do chefe super hot",
+                desc: "Salmão, Camarão, cream cheese, cebolinha, temporo especial do chefe e gergelim.",
+                price: "35,99",
+                img: "https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800",
+                duration: 8000
+            },
+            //HOT
+            {
+                type: 'normal',
+                cat: "Hots",
+                name: "HOT FILADÉLFIA",
+                desc: "",
+                price: "29,99",
+                img: "https://images.unsplash.com/photo-1617196034183-421b4917c92d?auto=format&fit=crop&w=800",
+                duration: 8000
+            }, 
+            {
+                type: 'normal',
+                cat: "Hots",
+                name: "HOT CAMARÃO",
+                desc: "",
+                price: "29,99",
+                img: "https://images.unsplash.com/photo-1617196034183-421b4917c92d?auto=format&fit=crop&w=800",
+                duration: 8000
+            },
+            {
+                type: 'normal',
+                cat: "Hots",
+                name: "HOT SKIN",
+                desc: "",
+                price: "29,99",
+                img: "https://images.unsplash.com/photo-1617196034183-421b4917c92d?auto=format&fit=crop&w=800",
+                duration: 8000
+            },
+            {
+                type: 'normal',
                 cat: "Hots",
                 name: "Hot do Chefe",
-                desc: "Salmão, camarão empanado, gergelim e molho especial do chefe.",
+                desc: "Salmão, cream cheese, cebolina e molho especial.",
                 price: "39,99",
                 img: "https://images.unsplash.com/photo-1617196034183-421b4917c92d?auto=format&fit=crop&w=800",
                 duration: 8000
