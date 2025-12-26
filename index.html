@@ -18,7 +18,7 @@
 
         .background-texture {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40' viewBox='0 0 80 40'%3E%3Cpath d='M0 40a40 40 0 0 1 40-40 40 40 0 0 1 40 40h-2a38 38 0 0 0-38-38A38 38 0 0 0 2 40H0zm4 0a36 36 0 0 1 36-36 36 36 0 0 1 36 36h-2a34 34 0 0 0-34-34A34 34 0 0 0 6 40H4zm4 0a32 32 0 0 1 32-32 32 32 0 0 1 32 32h-2a30 30 0 0 0-30-30A30 30 0 0 0 10 40H8zm4 0a28 28 0 0 1 28-28 28 28 0 0 1 28 28h-2a26 26 0 0 0-26-26A26 26 0 0 0 14 40h-2zm4 0a24 24 0 0 1 24-24 24 24 0 0 1 24 24h-2a22 22 0 0 0-22-22A22 22 0 0 0 18 40h-2z' fill='%231a1a1a' fill-opacity='0.4'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40' viewBox='0 0 80 40'%3E%3Cpath d='M0 40a40 40 0 0 1 40-40 40 40 0 0 1 40 40h-2a38 38 0 0 0-38-38A38 38 0 0 0 2 40H0zm4 0a36 36 0 0 1 36-36 36 36 0 0 1 36 36h-2a34 34 0 0 0-34-34A34 34 0 0 0 6 40H4zm4 0a32 32 0 0 1 32-32 32 32 0 0 1 32 32h-2a30 30 0 0 0-30-30A30 30 0 0 0 10 40H8zm4 0a28 28 0 0 1 28-28 28 28 0 0 1 28 28h-2a26 26 0 0 0-26-26A26 26 0 0 0 14 40h-2z' fill='%231a1a1a' fill-opacity='0.4'/%3E%3C/svg%3E");
             z-index: -1;
         }
 
@@ -65,84 +65,71 @@
 
     <script>
         const menuData = [
+            // CATEGORIA: TEMAKIS (FORMATO DE CONE)
             {
                 cat: "Temaki Tradicional",
                 name: "Filadélfia",
-                desc: "Salmão fresco em cubos, cream cheese e cebolinha.",
+                desc: "Cone de alga com arroz, salmão fresco e cream cheese.",
                 price: "28,99",
-                img: "https://images.unsplash.com/photo-1583623025817-d180a2221d0a?q=80&w=1000",
+                img: "https://images.unsplash.com/photo-1559410545-0bdcd187e0a6?w=800",
                 duration: 7000
             },
             {
                 cat: "Temaki Tradicional",
                 name: "Salmão",
-                desc: "Salmão premium picado com toque de cebolinha fresca.",
+                desc: "Tradicional cone de salmão premium com cebolinha.",
                 price: "28,99",
-                img: "https://images.unsplash.com/photo-1633652417417-9f6d59546f98?q=80&w=1000",
+                img: "https://images.pexels.com/photos/2098085/pexels-photo-2098085.jpeg?auto=compress&cs=tinysrgb&w=800",
                 duration: 7000
             },
             {
-                cat: "Temaki Super Hot",
-                name: "Camarão",
-                desc: "Camarão empanado, cream cheese e cebolinha.",
+                cat: "Temaki Especial",
+                name: "Camarão Super Hot",
+                desc: "Cone recheado com camarão empanado crocante.",
                 price: "28,99",
-                img: "https://images.unsplash.com/photo-1553621042-f6e147245754?q=80&w=1000",
+                img: "",
                 duration: 7000
             },
             {
                 cat: "Temaki Especial",
                 name: "Skin",
-                desc: "Pele de salmão grelhada crocante e cream cheese.",
+                desc: "Cone crocante de pele de salmão grelhada e tarê.",
                 price: "20,99",
-                img: "https://images.pexels.com/photos/2098085/pexels-photo-2098085.jpeg?auto=compress&cs=tinysrgb&w=1000",
+                img: "https://images.unsplash.com/photo-1615361065133-31728250005a?w=800",
                 duration: 7000
             },
             {
                 cat: "Temaki Super Hot",
-                name: "Filadélfia Hot",
+                name: "Filadélfia Super Hot",
                 desc: "O temaki Filadélfia inteiramente empanado e frito.",
                 price: "30,99",
-                img: "https://images.unsplash.com/photo-1617196034183-421b4917c92d?q=80&w=1000",
+                img: "https://images.pexels.com/photos/8951565/pexels-photo-8951565.jpeg?auto=compress&cs=tinysrgb&w=800",
                 duration: 7000
             },
+
+            // CATEGORIA: HOT ROLLS (PEÇAS CORTADAS E FRITAS)
             {
-                cat: "Temaki Super Hot",
-                name: "Do Chefe",
-                desc: "Salmão, Camarão, cream cheese e tempero especial.",
-                price: "35,99",
-                img: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=1000",
+                cat: "Hot Rolls",
+                name: "HOT FILADÉLFIA",
+                desc: "Peças de sushi de salmão e cream cheese empanadas na panko.",
+                price: "29,99",
+                img: "https://images.unsplash.com/photo-1617196034183-421b4917c92d?w=800",
                 duration: 7000
             },
             {
                 cat: "Hot Rolls",
-                name: "Hot Filadélfia",
-                desc: "Roll de salmão e cream cheese frito na farinha panko.",
+                name: "HOT CAMARÃO",
+                desc: "Peças fritas crocantes com recheio de camarão.",
                 price: "29,99",
-                img: "https://images.pexels.com/photos/8951202/pexels-photo-8951202.jpeg?auto=compress&cs=tinysrgb&w=1000",
-                duration: 7000
-            },
-            {
-                cat: "Hot Rolls",
-                name: "Hot Camarão",
-                desc: "Uramaki frito recheado com camarão e cream cheese.",
-                price: "29,99",
-                img: "https://images.unsplash.com/photo-1615361065133-31728250005a?q=80&w=1000",
-                duration: 7000
-            },
-            {
-                cat: "Hot Rolls",
-                name: "Hot Skin",
-                desc: "Roll frito de pele grelhada crocante com molho tarê.",
-                price: "29,99",
-                img: "https://images.unsplash.com/photo-1611143669185-af224c5e3252?q=80&w=1000",
+                img: "https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=800",
                 duration: 7000
             },
             {
                 cat: "Especialidade",
                 name: "Hot do Chefe",
-                desc: "Roll empanado com cobertura generosa de salmão e cebolinha.",
+                desc: "Roll frito especial com cobertura gourmet de salmão e cebolinha.",
                 price: "39,99",
-                img: "https://images.unsplash.com/photo-1559466273-d95e72debaf8?q=80&w=1000",
+                img: "",
                 duration: 7000
             }
         ];
@@ -163,7 +150,7 @@
                         </div>
                         <div class="item-image">
                             <img src="${item.img}" alt="${item.name}">
-                            <div class="hanko">FRESCOR<br>DIÁRIO</div>
+                            <div class="hanko">QUALIDADE<br>SUPREMA</div>
                         </div>
                     </div>
                 `;
