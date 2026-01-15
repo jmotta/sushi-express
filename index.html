@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vitrine Digital - Sushi Express</title>
+    <!-- Opção alternativa via HTML (descomente se preferir): 
+    <meta http-equiv="refresh" content="600"> 
+    -->
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Satisfy&family=Montserrat:wght@400;700;900&family=Noto+Sans+JP:wght@900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -65,13 +68,12 @@
 
     <script>
         const menuData = [
-            // CATEGORIA: TEMAKIS (FORMATO DE CONE)
             {
                 cat: "HOT",
                 name: "Filadélfia",
                 desc: "Hot Roll Panko (10 unid.) Enrolados de arroz recheados com cream cheese e cebolinha, empanados em farinha panko para máxima crocância.",
                 price: "29,99",
-                img: "",
+                img: "hot-filadelfia.jpg",
                 duration: 7000
             },
             {
@@ -79,7 +81,7 @@
                 name: "Camarão",
                 desc: "Hot Roll Panko (10 unid.) Enrolados de arroz recheados com cream cheese e cebolinha, empanados em farinha panko para máxima crocância.",
                 price: "29,99",
-                img: "",
+                img: "hot-camarao.jpg",
                 duration: 7000
             },
             {
@@ -87,7 +89,7 @@
                 name: "Skin",
                 desc: "Hot Roll Panko (10 unid.) Enrolados de arroz recheados com cream cheese e cebolinha, empanados em farinha panko para máxima crocância.",
                 price: "25,99",
-                img: "",
+                img: "hot-skin.jpg",
                 duration: 7000
             },
             {
@@ -95,7 +97,7 @@
                 name: "Chefe",
                 desc: "Hot Roll Panko (10 unid.) Enrolados de arroz recheados com cream cheese e cebolinha, empanados em farinha panko para máxima crocância.",
                 price: "39,99",
-                img: "",
+                img: "hot-chefe.jpg",
                 duration: 8000
             },
             
@@ -128,12 +130,21 @@
 
         function runCarousel(idx) {
             const slides = document.querySelectorAll('.slide');
+            if (slides.length === 0) return;
+            
             slides.forEach(s => s.classList.remove('active'));
             slides[idx].classList.add('active');
 
             const nextIdx = (idx + 1) % menuData.length;
             setTimeout(() => runCarousel(nextIdx), menuData[idx].duration);
         }
+
+        // --- CÓDIGO PARA REFRESH AUTOMÁTICO ---
+        const dezMinutos = 10 * 60 * 1000; // 10 min * 60 seg * 1000 ms
+        setTimeout(() => {
+            window.location.reload();
+        }, dezMinutos);
+        // --------------------------------------
 
         window.onload = buildSlides;
     </script>
