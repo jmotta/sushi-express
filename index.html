@@ -4,10 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vitrine Digital - Sushi Express</title>
-    
-    <!-- Opção 1: Refresh via HTML (600 segundos = 10 minutos) -->
-    <meta http-equiv="refresh" content="60">
-
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Satisfy&family=Montserrat:wght@400;700;900&family=Noto+Sans+JP:wght@900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -48,29 +44,28 @@
         .price { font-size: 7vw; font-weight: 900; display: flex; align-items: baseline; color: #fff; }
         .price span { font-size: 3vw; color: var(--gold); margin-right: 12px; }
 
-        .item-image { flex: 1.3; position: relative; height: 55vh; border: 12px solid #111; outline: 2px solid var(--gold); box-shadow: 0 40px 80px rgba(0,0,0,0.9); border-radius: 4px; overflow: hidden; }
-        .item-image img { width: 100%; height: 100%; object-fit: cover; }
+        .item-image { 
+            flex: 1.3; position: relative; height: 55vh; 
+            border: 12px solid #111; outline: 2px solid var(--gold); 
+            box-shadow: 0 40px 80px rgba(0,0,0,0.9); border-radius: 4px; 
+            overflow: hidden; background: #000; 
+        }
+        .item-image img, .item-image iframe { width: 100%; height: 100%; object-fit: cover; border: none; }
         
-        .hanko { position: absolute; bottom: 20px; right: 20px; border: 4px solid var(--red); color: var(--red); padding: 10px; font-weight: 900; transform: rotate(-10deg); background: rgba(0,0,0,0.8); font-size: 1.2vw; text-align: center; }
+        .hanko { position: absolute; bottom: 20px; right: 20px; border: 4px solid var(--red); color: var(--red); padding: 10px; font-weight: 900; transform: rotate(-10deg); background: rgba(0,0,0,0.8); font-size: 1.2vw; text-align: center; z-index: 5; }
 
-        /* --- ESTILOS EXCLUSIVOS PARA PROMOÇÃO --- */
+        /* ESTILOS PROMOÇÃO */
         .promo-slide { background: radial-gradient(circle, rgba(188,0,45,0.2) 0%, rgba(5,5,5,0) 70%); }
         .promo-slide .item-info { border-left-color: var(--gold); }
         .promo-slide .price { color: var(--gold); animation: pulse-price 2s infinite; }
-        .promo-slide .item-image { outline-width: 5px; outline-color: var(--gold); box-shadow: 0 0 50px rgba(212, 175, 55, 0.3); }
         .promo-slide .hanko { border-color: var(--gold); color: var(--gold); }
-
         .promo-badge {
             position: absolute; top: -40px; left: -10px; background: var(--gold); color: var(--dark); padding: 10px 30px;
             font-weight: 900; font-size: 1.8vw; transform: rotate(-5deg); box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
-            z-index: 10; font-family: 'Anton', sans-serif; letter-spacing: 2px;
+            z-index: 10; font-family: 'Anton', sans-serif;
         }
 
-        @keyframes pulse-price {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.08); }
-            100% { transform: scale(1); }
-        }
+        @keyframes pulse-price { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
     </style>
 </head>
 <body>
@@ -91,43 +86,31 @@
         const menuData = [
             {
                 type: 'normal',
-                cat: "HOT",
-                name: "Filadélfia",
-                desc: "Hot Roll Panko (10 unid.) Enrolados de arroz recheados com cream cheese e cebolinha, empanados em farinha panko.",
+                cat: "HOT ROLL",
+                name: "Filadélfia Clássico",
+                desc: "10 unidades enroladas em alga e arroz, com recheio de salmão e cream cheese.",
                 price: "29,99",
-                img: "./hot-filadelfia.jpg",
-                duration: 7000,
-                info: '+ VENDIDO!'
-            },
-            {
-                type: 'normal',
-                cat: "HOT",
-                name: "Camarão",
-                desc: "Hot Roll Panko (10 unid.) Recheados com camarões selecionados, cream cheese e empanamento crocante.",
-                price: "29,99",
-                img: "./hot-camarao.jpg",
-                duration: 7000,
-                info: ''
+                img: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=1000",
+                duration: 7000
             },
             {   
                 type: "promo", 
-                cat: "OFERTA DA SEMANA",
-                name: "Combo 50 Peças (Só Love Hot)",
-                desc: "O MELHOR CUSTO BENEFÍCIO: 20 Hot Filadélfia, 20 Hot Camarão, 10 Hot do Chefe. Perfeito para compartilhar!",
-                price: "119,99",
-                img: "./hot-so_love_hot.jpg",
-                duration: 12000,
-                info: ''
+                cat: "PROMOÇÃO DA SEMANA",
+                name: "Combo Super Love",
+                desc: "O queridinho da casa! 40 peças variadas com o melhor do nosso salmão fresco.",
+                price: "89,90",
+                // Exemplo de vídeo de Sushi do YouTube
+                youtubeID: "p_u_O0pM-G4", 
+                duration: 20000 // Promoção com vídeo dura mais tempo
             },
             {
                 type: 'normal',
                 cat: "TEMAKI",
-                name: "Filadélfia Super Hot",
-                desc: "Salmão, cream cheese e cebolinha. Empanado e frito na panko.",
-                price: "39,99",
-                img: "./temaki-filadelfia_super_hot.jpg",
-                duration: 7000,
-                info: ''
+                name: "Temaki Salmão",
+                desc: "Cone de alga crocante recheado com cubos de salmão fresco e cebolinha.",
+                price: "34,90",
+                img: "https://images.unsplash.com/photo-1583623025817-d180a2221d0a?q=80&w=1000",
+                duration: 7000
             }
         ];
 
@@ -137,16 +120,22 @@
             menuData.forEach((item, index) => {
                 const isPromo = item.type === 'promo';
                 const slide = document.createElement('div');
-                
                 slide.className = `slide ${index === 0 ? 'active' : ''} ${isPromo ? 'promo-slide' : ''}`;
                 
-                let hankoText = "QUALIDADE<br>SUPREMA";
-                if (isPromo) hankoText = "OFERTA<br>LIMITADA";
-                else if (item.info) hankoText = item.info;
+                let hankoText = isPromo ? "OFERTA<br>LIMITADA" : "QUALIDADE<br>SUPREMA";
+
+                // Lógica para exibir Imagem ou Vídeo do YouTube
+                let mediaHtml = '';
+                if (isPromo && item.youtubeID) {
+                    // Parâmetros: autoplay=1 (tocar só), mute=1 (mudo), controls=0 (sem botões), loop=1 (repetir)
+                    mediaHtml = `<iframe src="https://www.youtube.com/embed/${item.youtubeID}?autoplay=1&mute=1&controls=0&loop=1&playlist=${item.youtubeID}&rel=0&showinfo=0" allow="autoplay"></iframe>`;
+                } else {
+                    mediaHtml = `<img src="${item.img}" alt="${item.name}">`;
+                }
 
                 slide.innerHTML = `
                     <div class="content-wrap">
-                        ${isPromo ? '<div class="promo-badge">PROMOÇÃO DA SEMANA</div>' : ''}
+                        ${isPromo ? '<div class="promo-badge">DESTAQUE DA SEMANA</div>' : ''}
                         <div class="item-info">
                             <div class="category">${item.cat}</div>
                             <div class="name">${item.name}</div>
@@ -154,7 +143,7 @@
                             <div class="price"><span>R$</span>${item.price}</div>
                         </div>
                         <div class="item-image">
-                            <img src="${item.img}" alt="${item.name}">
+                            ${mediaHtml}
                             <div class="hanko">${hankoText}</div>
                         </div>
                     </div>
@@ -171,17 +160,19 @@
             slides.forEach(s => s.classList.remove('active'));
             slides[idx].classList.add('active');
 
-            const nextIdx = (idx + 1) % menuData.length;
-            setTimeout(() => runCarousel(nextIdx), menuData[idx].duration);
+            const proximoIdx = idx + 1;
+            
+            if (proximoIdx < menuData.length) {
+                // Se não for o último, agenda o próximo slide
+                setTimeout(() => runCarousel(proximoIdx), menuData[idx].duration);
+            } else {
+                // Se for o ÚLTIMO slide, espera o tempo dele e dá REFRESH na página
+                setTimeout(() => {
+                    console.log("Fim do ciclo atingido. Recarregando vitrine...");
+                    window.location.reload();
+                }, menuData[idx].duration);
+            }
         }
-
-        // --- LÓGICA DE REFRESH (10 MINUTOS) ---
-        const tempoRefresh = 1 * 60 * 1000; // 10 min * 60 seg * 1000 ms
-        setTimeout(() => {
-            console.log("Atualizando vitrine...");
-            window.location.reload();
-        }, tempoRefresh);
-        // --------------------------------------
 
         window.onload = buildSlides;
     </script>
