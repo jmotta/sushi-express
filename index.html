@@ -84,35 +84,94 @@
 
     <script>
         const menuData = [
-            {
-                type: 'normal',
-                cat: "HOT ROLL",
-                name: "Filadélfia Clássico",
-                desc: "10 unidades enroladas em alga e arroz, com recheio de salmão e cream cheese.",
-                price: "29,99",
-                img: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=1000",
-                duration: 7000
-            },
-            {   
-                type: "promo", 
-                cat: "PROMOÇÃO DA SEMANA",
-                name: "Combo Super Love",
-                desc: "O queridinho da casa! 40 peças variadas com o melhor do nosso salmão fresco.",
-                price: "89,90",
-                // Exemplo de vídeo de Sushi do YouTube
-                youtubeID: "p_u_O0pM-G4", 
-                duration: 20000 // Promoção com vídeo dura mais tempo
-            },
-            {
-                type: 'normal',
-                cat: "TEMAKI",
-                name: "Temaki Salmão",
-                desc: "Cone de alga crocante recheado com cubos de salmão fresco e cebolinha.",
-                price: "34,90",
-                img: "https://images.unsplash.com/photo-1583623025817-d180a2221d0a?q=80&w=1000",
-                duration: 7000
-            }
+        {
+            type: 'normal',
+            cat: "HOT ROLL",
+            name: "Filadélfia Clássico",
+            desc: "10 unidades enroladas em alga e arroz, com recheio de salmão e cream cheese.",
+            price: "29,99",
+            img: "./hot-filadelfia.jpg",
+            duration: 7000
+        },
+        {
+            type: 'normal',
+            cat: "HOT ROLL",
+            name: "Camarão",
+            desc: "Hot Roll Panko (10 unid.) Enrolados de arroz recheados com cream cheese e cebolinha, empanados em farinha panko para máxima crocância.",
+            price: "29,99",
+            img: "./hot-camarao.jpg",
+            duration: 7000
+        },
+        {
+            type: 'normal',
+            cat: "HOT ROLL",
+            name: "Skin",
+            desc: "Hot Roll Panko (10 unid.) Enrolados de arroz recheados com cream cheese e cebolinha, empanados em farinha panko para máxima crocância.",
+            price: "25,99",
+            img: "./hot-skin.jpg",
+            duration: 7000
+        },
+        {
+            type: 'normal',
+            cat: "HOT ROLL",
+            name: "Chefe",
+            desc: "Hot Roll Panko (10 unid.) Enrolados de arroz recheados com cream cheese e cebolinha, empanados em farinha panko para máxima crocância.",
+            price: "39,99",
+            img: "./hot-chefe.jpg",
+            duration: 8000
+        },
+        {   
+            type: "promo", 
+            cat: "HOT ROLL",
+            name: "Combo 50 Peças (Só Love Hot)",
+            desc: "20 Hot Filadélfia, 20 Hot Camarão, 10 Hot do Chefe.",
+            price: "119,99",
+            img: "./hot-so_love_hot.jpg",
+            duration: 7000
+        },
+        {
+            type: 'normal',
+            cat: "TEMAKI",
+            name: "Filadélfia Super Hot",
+            desc: "Salmão, cream cheese e cebolinha. Empanado e frito na panko.",
+            price: "39,99",
+            img: "./temaki-filadelfia_super_hot.jpg",
+            duration: 7000
+        },
+        {
+            type: 'normal',
+            cat: "HARUMAKI",
+            name: "Frango com Requeijão",
+            desc: "Rolinho primavera 2 unidades",
+            price: "18,99",
+            img: "./harumaki-frango_queijo.jpg",
+            duration: 7000
+        },
+        {
+            type: 'normal',
+            cat: "HARUMAKI",
+            name: "Camarão,Cream Cheese e Alho Poró",
+            desc: "Rolinho primavera 2 unidades",
+            price: "19,99",
+            img: "./harumaki-camarao_queijo_alho_poro.jpg",
+            duration: 7000
+        },
+        {   
+            type: "promo", 
+            cat: "PROMOÇÃO DA SEMANA",
+            name: "Combo Super Love",
+            desc: "O queridinho da casa! 40 peças variadas com o melhor do nosso salmão fresco.",
+            price: "89,90",
+            // Exemplo de vídeo de Sushi do YouTube
+            youtubeID: "NQ6_Sqt_w3Y", 
+            duration: 20000 // Promoção com vídeo dura mais tempo
+        },
+
         ];
+
+
+
+
 
         const carousel = document.getElementById('carousel');
 
