@@ -1,135 +1,206 @@
-<div class="background-texture"></div>
-<div class="rising-sun"></div>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitrine Digital - Sushi Express</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Satisfy&family=Montserrat:wght@400;700;900&family=Noto+Sans+JP:wght@900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #bc002d; 
+            --gold: #d4af37;
+            --dark: #050505;
+            --white: #f4f4f4;
+        }
 
-<header class="main-header">
-    <div class="logo-container">
-        <div class="text-sushi">SUSHI</div>
-        <div class="text-express">Express</div>
-    </div>
-</header>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { width: 100vw; height: 100vh; background-color: var(--dark); color: var(--white); font-family: 'Montserrat', sans-serif; overflow: hidden; }
 
-<div id="carousel"></div>
+        .background-texture {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40' viewBox='0 0 80 40'%3E%3Cpath d='M0 40a40 40 0 0 1 40-40 40 40 0 0 1 40 40h-2a38 38 0 0 0-38-38A38 38 0 0 0 2 40H0zm4 0a36 36 0 0 1 36-36 36 36 0 0 1 36 36h-2a34 34 0 0 0-34-34A34 34 0 0 0 6 40H4zm4 0a32 32 0 0 1 32-32 32 32 0 0 1 32 32h-2a30 30 0 0 0-30-30A30 30 0 0 0 10 40H8zm4 0a28 28 0 0 1 28-28 28 28 0 0 1 28 28h-2a26 26 0 0 0-26-26A26 26 0 0 0 14 40h-2z' fill='%231a1a1a' fill-opacity='0.4'/%3E%3C/svg%3E");
+            z-index: -1;
+        }
 
-<script>
-    const menuData = [
-        {
-            type: 'normal',
-            cat: "HOT",
-            name: "Filadélfia",
-            desc: "Hot Roll Panko (10 unid.) Enrolados de arroz recheados com cream cheese e cebolinha, empanados em farinha panko para máxima crocância.",
-            price: "29,99",
-            img: "./hot-filadelfia.jpg",
-            duration: 7000
-        },
-        {
-            type: 'normal',
-            cat: "HOT",
-            name: "Camarão",
-            desc: "Hot Roll Panko (10 unid.) Enrolados de arroz recheados com cream cheese e cebolinha, empanados em farinha panko para máxima crocância.",
-            price: "29,99",
-            img: "./hot-camarao.jpg",
-            duration: 7000
-        },
-        {
-            type: 'normal',
-            cat: "HOT",
-            name: "Skin",
-            desc: "Hot Roll Panko (10 unid.) Enrolados de arroz recheados com cream cheese e cebolinha, empanados em farinha panko para máxima crocância.",
-            price: "25,99",
-            img: "./hot-skin.jpg",
-            duration: 7000
-        },
-        {
-            type: 'normal',
-            cat: "HOT",
-            name: "Chefe",
-            desc: "Hot Roll Panko (10 unid.) Enrolados de arroz recheados com cream cheese e cebolinha, empanados em farinha panko para máxima crocância.",
-            price: "39,99",
-            img: "./hot-chefe.jpg",
-            duration: 8000
-        },
-        {   
-            type: "promo", 
-            cat: "HOT",
-            name: "Combo 50 Peças (Só Love Hot)",
-            desc: "20 Hot Filadélfia, 20 Hot Camarão, 10 Hot do Chefe.",
-            price: "119,99",
-            img: "./hot-so_love_hot.jpg",
-            duration: 7000
-        },
-        {
-            type: 'normal',
-            cat: "TEMAKI",
-            name: "Filadélfia Super Hot",
-            desc: "Salmão, cream cheese e cebolinha. Empanado e frito na panko.",
-            price: "39,99",
-            img: "./temaki-filadelfia_super_hot.jpg",
-            duration: 7000
-        },
-        {
-            type: 'normal',
-            cat: "HARUMAKI",
-            name: "Frango com Requeijão",
-            desc: "Rolinho primavera 2 unidades",
-            price: "18,99",
-            img: "./harumaki-frango_queijo.jpg",
-            duration: 7000
-        },
-        {
-            type: 'normal',
-            cat: "HARUMAKI",
-            name: "Camarão,Cream Cheese e Alho Poró",
-            desc: "Rolinho primavera 2 unidades",
-            price: "19,99",
-            img: "./harumaki-camarao_queijo_alho_poro.jpg",
-            duration: 7000
-        },
+        .rising-sun {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 70vh; height: 70vh; background: var(--red); filter: blur(100px); opacity: 0.12; border-radius: 50%; z-index: 0;
+        }
+
+        .main-header { position: absolute; top: 4vh; left: 50%; transform: translateX(-50%); z-index: 100; text-align: center; width: 100%; }
+        .text-sushi { font-family: 'Anton', sans-serif; font-size: 8vw; color: var(--red); line-height: 0.8; letter-spacing: 5px; }
+        .text-express { font-family: 'Satisfy', cursive; font-size: 6vw; color: var(--white); position: absolute; bottom: -1vw; right: 30%; transform: rotate(-5deg); text-shadow: 3px 3px 10px rgba(0,0,0,0.8); }
+
+        #carousel { width: 100%; height: 100%; position: relative; }
+        .slide { position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 1s ease-in-out; padding: 0 8vw; visibility: hidden; }
+        .slide.active { opacity: 1; visibility: visible; }
+
+        .content-wrap { display: flex; align-items: center; gap: 6vw; z-index: 2; width: 100%; max-width: 1400px; position: relative; }
+        .item-info { flex: 1; border-left: 5px solid var(--red); padding-left: 40px; }
+        .category { color: var(--gold); font-size: 1.4vw; letter-spacing: 6px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 15px; }
+        .category::before { content: ""; width: 40px; height: 2px; background: var(--gold); }
+        .name { font-size: 4.5vw; font-weight: 900; margin-bottom: 20px; line-height: 1; text-transform: uppercase; }
+        .desc { font-size: 1.6vw; color: #bbb; margin-bottom: 40px; max-width: 550px; font-weight: 400; }
+        .price { font-size: 7vw; font-weight: 900; display: flex; align-items: baseline; color: #fff; }
+        .price span { font-size: 3vw; color: var(--gold); margin-right: 12px; }
+
+        .item-image { flex: 1.3; position: relative; height: 55vh; border: 12px solid #111; outline: 2px solid var(--gold); box-shadow: 0 40px 80px rgba(0,0,0,0.9); border-radius: 4px; overflow: hidden; }
+        .item-image img { width: 100%; height: 100%; object-fit: cover; }
+        .hanko { position: absolute; bottom: 20px; right: 20px; border: 4px solid var(--red); color: var(--red); padding: 10px; font-weight: 900; transform: rotate(-10deg); background: rgba(0,0,0,0.7); font-size: 1.2vw; }
+
+        /* --- ESTILOS EXCLUSIVOS PARA PROMOÇÃO --- */
+        .promo-slide {
+            background: radial-gradient(circle, rgba(188,0,45,0.15) 0%, rgba(5,5,5,0) 70%);
+        }
         
-        
-    ];
+        .promo-slide .item-info {
+            border-left: 8px solid var(--gold); /* Troca vermelho por ouro */
+        }
 
-    const carousel = document.getElementById('carousel');
+        .promo-slide .price {
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            animation: pulse-price 2s infinite;
+        }
 
-    function buildSlides() {
-        menuData.forEach((item, index) => {
-            const slide = document.createElement('div');
-            slide.className = `slide ${index === 0 ? 'active' : ''}`;
-            slide.innerHTML = `
-                <div class="content-wrap">
-                    <div class="item-info">
-                        <div class="category">${item.cat}</div>
-                        <div class="name">${item.name}</div>
-                        <div class="desc">${item.desc}</div>
-                        <div class="price"><span>R$</span>${item.price}</div>
+        .promo-slide .item-image {
+            outline: 5px solid var(--gold);
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
+        }
+
+        .promo-badge {
+            position: absolute;
+            top: -30px;
+            left: -10px;
+            background: var(--gold);
+            color: var(--dark);
+            padding: 10px 30px;
+            font-weight: 900;
+            font-size: 1.8vw;
+            transform: rotate(-5deg);
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+            z-index: 10;
+            font-family: 'Anton', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        @keyframes pulse-price {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-texture"></div>
+    <div class="rising-sun"></div>
+
+    <header class="main-header">
+        <div class="logo-container">
+            <div class="text-sushi">SUSHI</div>
+            <div class="text-express">Express</div>
+        </div>
+    </header>
+
+    <div id="carousel"></div>
+
+    <script>
+        const menuData = [
+            {
+                type: 'normal',
+                cat: "HOT",
+                name: "Filadélfia",
+                desc: "Hot Roll Panko (10 unid.) Enrolados de arroz recheados com cream cheese e cebolinha, empanados em farinha panko.",
+                price: "29,99",
+                img: "./hot-filadelfia.jpg",
+                duration: 7000
+            },
+            {
+                type: 'normal',
+                cat: "HOT",
+                name: "Camarão",
+                desc: "Hot Roll Panko (10 unid.) Recheados com camarões selecionados, cream cheese e empanamento crocante.",
+                price: "29,99",
+                img: "./hot-camarao.jpg",
+                duration: 7000
+            },
+            {   
+                type: "promo", 
+                cat: "OFERTA DA SEMANA",
+                name: "Combo 50 Peças (Só Love Hot)",
+                desc: "O MELHOR CUSTO BENEFÍCIO: 20 Hot Filadélfia, 20 Hot Camarão, 10 Hot do Chefe. Perfeito para compartilhar!",
+                price: "119,99",
+                img: "./hot-so_love_hot.jpg",
+                duration: 12000 // Promoção fica mais tempo na tela
+            },
+            {
+                type: 'normal',
+                cat: "TEMAKI",
+                name: "Filadélfia Super Hot",
+                desc: "Salmão, cream cheese e cebolinha. Empanado e frito na panko.",
+                price: "39,99",
+                img: "./temaki-filadelfia_super_hot.jpg",
+                duration: 7000
+            },
+            {
+                type: 'normal',
+                cat: "HARUMAKI",
+                name: "Frango com Requeijão",
+                desc: "Rolinho primavera crocante (2 unidades).",
+                price: "18,99",
+                img: "./harumaki-frango_queijo.jpg",
+                duration: 7000
+            }
+        ];
+
+        const carousel = document.getElementById('carousel');
+
+        function buildSlides() {
+            menuData.forEach((item, index) => {
+                const isPromo = item.type === 'promo';
+                const slide = document.createElement('div');
+                
+                // Adiciona a classe promo-slide se o tipo for promo
+                slide.className = `slide ${index === 0 ? 'active' : ''} ${isPromo ? 'promo-slide' : ''}`;
+                
+                slide.innerHTML = `
+                    <div class="content-wrap">
+                        ${isPromo ? '<div class="promo-badge">PROMOÇÃO DA SEMANA</div>' : ''}
+                        <div class="item-info">
+                            <div class="category">${item.cat}</div>
+                            <div class="name">${item.name}</div>
+                            <div class="desc">${item.desc}</div>
+                            <div class="price"><span>R$</span>${item.price}</div>
+                        </div>
+                        <div class="item-image">
+                            <img src="${item.img}" alt="${item.name}">
+                            <div class="hanko">${isPromo ? 'OFERTA<br>LIMITADA' : 'QUALIDADE<br>SUPREMA'}</div>
+                        </div>
                     </div>
-                    <div class="item-image">
-                        <img src="${item.img}" alt="${item.name}">
-                        <div class="hanko">QUALIDADE<br>SUPREMA</div>
-                    </div>
-                </div>
-            `;
-            carousel.appendChild(slide);
-        });
-        runCarousel(0);
-    }
+                `;
+                carousel.appendChild(slide);
+            });
+            runCarousel(0);
+        }
 
-    function runCarousel(idx) {
-        const slides = document.querySelectorAll('.slide');
-        if (slides.length === 0) return;
-        
-        slides.forEach(s => s.classList.remove('active'));
-        slides[idx].classList.add('active');
+        function runCarousel(idx) {
+            const slides = document.querySelectorAll('.slide');
+            if (slides.length === 0) return;
+            
+            slides.forEach(s => s.classList.remove('active'));
+            slides[idx].classList.add('active');
 
-        const nextIdx = (idx + 1) % menuData.length;
-        setTimeout(() => runCarousel(nextIdx), menuData[idx].duration);
-    }
+            const nextIdx = (idx + 1) % menuData.length;
+            setTimeout(() => runCarousel(nextIdx), menuData[idx].duration);
+        }
 
-    // --- CÓDIGO PARA REFRESH AUTOMÁTICO ---
-    const dezMinutos = 2 * 60 * 1000; // 10 min * 60 seg * 1000 ms
-    setTimeout(() => {
-        window.location.reload();
-    }, dezMinutos);
-    // --------------------------------------
+        // Refresh automático a cada 10 minutos
+        setTimeout(() => {
+            window.location.reload();
+        }, 600000);
 
-    window.onload = buildSlides;
-</script>
+        window.onload = buildSlides;
+    </script>
+</body>
+</html>
