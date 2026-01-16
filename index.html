@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vitrine Digital - Sushi Express</title>
+    
+    <!-- Opção 1: Refresh via HTML (600 segundos = 10 minutos) -->
+    <meta http-equiv="refresh" content="600">
+
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Satisfy&family=Montserrat:wght@400;700;900&family=Noto+Sans+JP:wght@900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -46,47 +50,25 @@
 
         .item-image { flex: 1.3; position: relative; height: 55vh; border: 12px solid #111; outline: 2px solid var(--gold); box-shadow: 0 40px 80px rgba(0,0,0,0.9); border-radius: 4px; overflow: hidden; }
         .item-image img { width: 100%; height: 100%; object-fit: cover; }
-        .hanko { position: absolute; bottom: 20px; right: 20px; border: 4px solid var(--red); color: var(--red); padding: 10px; font-weight: 900; transform: rotate(-10deg); background: rgba(0,0,0,0.7); font-size: 1.2vw; }
+        
+        .hanko { position: absolute; bottom: 20px; right: 20px; border: 4px solid var(--red); color: var(--red); padding: 10px; font-weight: 900; transform: rotate(-10deg); background: rgba(0,0,0,0.8); font-size: 1.2vw; text-align: center; }
 
         /* --- ESTILOS EXCLUSIVOS PARA PROMOÇÃO --- */
-        .promo-slide {
-            background: radial-gradient(circle, rgba(188,0,45,0.15) 0%, rgba(5,5,5,0) 70%);
-        }
-        
-        .promo-slide .item-info {
-            border-left: 8px solid var(--gold); /* Troca vermelho por ouro */
-        }
-
-        .promo-slide .price {
-            color: var(--gold);
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-            animation: pulse-price 2s infinite;
-        }
-
-        .promo-slide .item-image {
-            outline: 5px solid var(--gold);
-            box-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
-        }
+        .promo-slide { background: radial-gradient(circle, rgba(188,0,45,0.2) 0%, rgba(5,5,5,0) 70%); }
+        .promo-slide .item-info { border-left-color: var(--gold); }
+        .promo-slide .price { color: var(--gold); animation: pulse-price 2s infinite; }
+        .promo-slide .item-image { outline-width: 5px; outline-color: var(--gold); box-shadow: 0 0 50px rgba(212, 175, 55, 0.3); }
+        .promo-slide .hanko { border-color: var(--gold); color: var(--gold); }
 
         .promo-badge {
-            position: absolute;
-            top: -30px;
-            left: -10px;
-            background: var(--gold);
-            color: var(--dark);
-            padding: 10px 30px;
-            font-weight: 900;
-            font-size: 1.8vw;
-            transform: rotate(-5deg);
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
-            z-index: 10;
-            font-family: 'Anton', sans-serif;
-            letter-spacing: 2px;
+            position: absolute; top: -40px; left: -10px; background: var(--gold); color: var(--dark); padding: 10px 30px;
+            font-weight: 900; font-size: 1.8vw; transform: rotate(-5deg); box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+            z-index: 10; font-family: 'Anton', sans-serif; letter-spacing: 2px;
         }
 
         @keyframes pulse-price {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.08); }
             100% { transform: scale(1); }
         }
     </style>
@@ -115,7 +97,7 @@
                 price: "29,99",
                 img: "./hot-filadelfia.jpg",
                 duration: 7000,
-                info: '+ Vendido!'
+                info: '+ VENDIDO!'
             },
             {
                 type: 'normal',
@@ -146,16 +128,6 @@
                 img: "./temaki-filadelfia_super_hot.jpg",
                 duration: 7000,
                 info: ''
-            },
-            {
-                type: 'normal',
-                cat: "HARUMAKI",
-                name: "Frango com Requeijão",
-                desc: "Rolinho primavera crocante (2 unidades).",
-                price: "18,99",
-                img: "./harumaki-frango_queijo.jpg",
-                duration: 7000,
-                info: ''
             }
         ];
 
@@ -166,25 +138,25 @@
                 const isPromo = item.type === 'promo';
                 const slide = document.createElement('div');
                 
-                // Adiciona a classe promo-slide se o tipo for promo
                 slide.className = `slide ${index === 0 ? 'active' : ''} ${isPromo ? 'promo-slide' : ''}`;
                 
+                let hankoText = "QUALIDADE<br>SUPREMA";
+                if (isPromo) hankoText = "OFERTA<br>LIMITADA";
+                else if (item.info) hankoText = item.info;
+
                 slide.innerHTML = `
                     <div class="content-wrap">
                         ${isPromo ? '<div class="promo-badge">PROMOÇÃO DA SEMANA</div>' : ''}
                         <div class="item-info">
-                            <div></div>
                             <div class="category">${item.cat}</div>
                             <div class="name">${item.name}</div>
                             <div class="desc">${item.desc}</div>
                             <div class="price"><span>R$</span>${item.price}</div>
                         </div>
-                        ${isPromo || info ?
-                          <div class="item-image">
+                        <div class="item-image">
                             <img src="${item.img}" alt="${item.name}">
-                            <div class="hanko">${isPromo ? 'OFERTA<br>LIMITADA' : info}</div>
+                            <div class="hanko">${hankoText}</div>
                         </div>
-                        }
                     </div>
                 `;
                 carousel.appendChild(slide);
@@ -203,10 +175,13 @@
             setTimeout(() => runCarousel(nextIdx), menuData[idx].duration);
         }
 
-        // Refresh automático a cada 10 minutos
+        // --- LÓGICA DE REFRESH (10 MINUTOS) ---
+        const tempoRefresh = 1 * 60 * 1000; // 10 min * 60 seg * 1000 ms
         setTimeout(() => {
+            console.log("Atualizando vitrine...");
             window.location.reload();
-        }, 600000);
+        }, tempoRefresh);
+        // --------------------------------------
 
         window.onload = buildSlides;
     </script>
